@@ -79,8 +79,9 @@ io.on('connection', (socket) => {
 });
 
 const PORT = process.env.PORT || 8003;
-server.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-    console.log(`Drone interface: http://localhost:${PORT}/drone.html`);
-    console.log(`Doctor interface: http://localhost:${PORT}/doctor.html`);
+server.listen(PORT, "0.0.0.0", () => {
+    console.log(`✅ Server running on port ${PORT}`);
+    console.log(`🚁 Drone interface: /drone.html`);
+    console.log(`👨‍⚕️ Doctor interface: /doctor.html`);
 });
+
