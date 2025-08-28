@@ -9,7 +9,8 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
-        origin: "*", // ✅ Allow all origins (for Railway + localhost)
+       origin: ["https://anjum-ahhy.onrender.com"],
+ // ✅ Allow all origins (for Railway + localhost)
         methods: ["GET", "POST"],
         credentials: true,
         allowedHeaders: ["Content-Type", "Authorization"]
@@ -75,3 +76,4 @@ server.listen(PORT, "0.0.0.0", () => {
     console.log(`🚁 Drone interface: /drone.html`);
     console.log(`👨‍⚕️ Doctor interface: /doctor.html`);
 });
+
