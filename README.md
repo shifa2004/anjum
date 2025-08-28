@@ -11,7 +11,6 @@ It allows doctors to monitor patients remotely while drones provide live video, 
 - `doctor.html` → Doctor interface (doctor video feed, drone video, GPS map, patient list)  
 - `server.js` → Backend server (Node.js + Express + Socket.IO)  
 - `package.json` / `package-lock.json` → Dependencies list  
-- `.env` → Environment variables (`PORT=8003`)  
 - `dr.k.krishna naik.png` / `gulam kashifa anjum.jpeg` → Project images  
 
 ---
@@ -34,8 +33,7 @@ It allows doctors to monitor patients remotely while drones provide live video, 
 2.Install dependencies:
     npm install
 
-3.Configure .env file:
-    PORT=8003
+
 
 🟢 Step 1: Find Your Local IP Address
 
