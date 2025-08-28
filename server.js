@@ -9,7 +9,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
-        origin: ["http://localhost:3000", "http://localhost:8080"],
+        origin: "*", // ✅ Allow all origins (for Railway + localhost)
         methods: ["GET", "POST"],
         credentials: true,
         allowedHeaders: ["Content-Type", "Authorization"]
@@ -19,7 +19,7 @@ const io = new Server(server, {
 // --- Centralized Connection State ---
 let currentActiveConnection = null; // Stores the active drone-doctor connection
 
-// Serve static files
+// Serve static files (index.html, drone.html, doctor.html)
 app.use(express.static(__dirname));
 
 // Route handlers
@@ -39,7 +39,6 @@ app.get('/doctor.html', (req, res) => {
 io.on('connection', (socket) => {
     console.log(`User connected: ${socket.id}`);
 
-    // Send current active connection to newly connected client
     if (currentActiveConnection) {
         socket.emit('currentConnectionStatus', currentActiveConnection);
     }
@@ -49,32 +48,24 @@ io.on('connection', (socket) => {
         console.log(`${socket.id} joined room: ${room}`);
     });
 
-    // --- Handle Connection Updates from Clients ---
     socket.on('updateConnection', (connectionData) => {
         currentActiveConnection = connectionData;
         console.log('Updated active connection:', currentActiveConnection);
-        // Broadcast the updated connection status to all connected clients
         io.emit('currentConnectionStatus', currentActiveConnection);
     });
 
-    // --- Handle Connection Reset from Clients ---
     socket.on('resetConnection', () => {
         currentActiveConnection = null;
         console.log('Connection reset by a client.');
-        // Broadcast the reset status to all connected clients
         io.emit('currentConnectionStatus', null);
     });
 
-    // --- GPS Data Sync ---
     socket.on('updateDroneData', (data) => {
         socket.to('108').emit('droneData', data);
     });
 
     socket.on('disconnect', () => {
         console.log(`User disconnected: ${socket.id}`);
-        // Optional: If you want to clear the connection if the last user disconnects
-        // This logic can be more complex depending on how you define "active" connections
-        // For simplicity, we'll keep the last set connection until explicitly reset.
     });
 });
 
@@ -84,4 +75,3 @@ server.listen(PORT, "0.0.0.0", () => {
     console.log(`🚁 Drone interface: /drone.html`);
     console.log(`👨‍⚕️ Doctor interface: /doctor.html`);
 });
-
