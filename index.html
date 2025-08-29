@@ -669,11 +669,11 @@
                 <h3 style="color: var(--accent); margin: 25px 0 15px;">Development Team:</h3>
                 <div class="team-members-container">
                     <div class="team-member">
-                         <img src="C:\Users\Dell\Downloads\testfile5\dr.k.krishna naik.png" alt="Dr. K. Krishna Naik">
+                         <img src="./dr.k.krishna naik.png" alt="Dr. K. Krishna Naik">
                         <p><strong>Faculty Lead:</strong> Dr. K. Krishna Naik</p>
                     </div>
                     <div class="team-member">
-                        <img src="C:\Users\Dell\Downloads\testfile5\gulam kashifa anjum.jpeg" alt="G. Kashifa Anjum">
+                        <img src="./gulam kashifa anjum.jpeg" alt="G. Kashifa Anjum">
                         <p><strong>Lead Developer:</strong> G. Kashifa Anjum</p>
                     </div>
                 </div>
@@ -684,7 +684,8 @@
     <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
     <script>
         // Initialize Socket.IO client
-        const socket = io('http://localhost:8003', {
+        // IMPORTANT: The URL is now explicitly set to your Railway app URL.
+        const socket = io('https://anjum.up.railway.app', {
             transports: ['websocket', 'polling'],
             autoConnect: true
         });
