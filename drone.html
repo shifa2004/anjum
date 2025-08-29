@@ -1163,9 +1163,9 @@
     let guideLine = null;
     let routingControl = null;
     let ambulanceInterval;
-    const PI_CAMERA_URL = "http://10.22.129.164:5000/normal"; // Updated Pi Camera URL
- const socket = io("https://anjum-ahhy.onrender.com");
- // Connect to the Socket.IO server
+    // Removed PI_CAMERA_URL as it's a local network address
+    // IMPORTANT: The URL is now explicitly set to your Railway app URL.
+    const socket = io('https://anjum.up.railway.app'); // Connect to the Socket.IO server
     
     // Kurnool city coordinates
     const KURNOOL_COORDS = [15.8281, 78.0373];
@@ -1888,4 +1888,3 @@
 </script>
 </body>
 </html>
-
